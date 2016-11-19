@@ -1,6 +1,8 @@
 package com.google.gwt.sample.climatechangeapp.client;
 
 
+
+
 import com.google.gwt.core.client.EntryPoint;
 //import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style;
@@ -23,6 +25,13 @@ import com.google.gwt.user.client.ui.TabLayoutPanel;
 //import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 
+//imports for timeline
+import com.chap.links.client.Timeline;
+//import com.google.gwt.i18n.client.DateTimeFormat;
+//import com.google.gwt.user.client.ui.RootPanel;
+//import com.google.gwt.visualization.client.DataTable;
+//import com.google.gwt.visualization.client.VisualizationUtils;
+
 /**
  * 
  * The class ClimateChangeApp generates the UI.
@@ -39,6 +48,9 @@ public class ClimateChangeApp extends DockLayoutPanel implements EntryPoint {
 	
 	private WorldMapView worldMapView = new WorldMapView();
 	private TableView tableView = new TableView();
+	
+	//add Timeline
+	Timeline timeline = null;
 	
 	//private Button exportButton= new Button("Export data");
 	//private Data data;
@@ -59,6 +71,9 @@ public class ClimateChangeApp extends DockLayoutPanel implements EntryPoint {
 		//Add tabPanel to north
 		addNorth(menu,40);
 		//addSouth(exportButton, 10);
+		
+		
+		
 	}
 	
 	/*
@@ -81,6 +96,9 @@ public class ClimateChangeApp extends DockLayoutPanel implements EntryPoint {
 		
 		//data = new Data();
 		//data.getData();
+		
+	
+		  
 	}
 	
 }

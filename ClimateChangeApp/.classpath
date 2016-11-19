@@ -8,5 +8,7 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-charts-0.9.8.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gwtbootstrap3-0.9.3.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gwtbootstrap3-extras-0.9.1.jar"/>
+	<classpathentry kind="lib" path="/Users/sophy/Desktop/SE-GroupES1-new/ClimateChangeApp/gwt-links-timeline.jar"/>
+	<classpathentry kind="lib" path="/Users/sophy/Desktop/SE-GroupES1-new/ClimateChangeApp/gwt-visualization.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

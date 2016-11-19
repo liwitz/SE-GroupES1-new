@@ -10,6 +10,12 @@
 	<inherits name='org.gwtbootstrap3.GwtBootstrap3'/>
 	<inherits name='org.gwtbootstrap3.GwtBootstrap3Theme'/>
 	
+	
+	<inherits name='com.google.gwt.visualization.Visualization'/> 
+	<inherits name='com.chap.links.Timeline'/> 
+	
+	<stylesheet src=""></stylesheet>  
+	
   <entry-point class='com.google.gwt.sample.climatechangeapp.client.ClimateChangeApp'/>
 
   <source path='client'/>
