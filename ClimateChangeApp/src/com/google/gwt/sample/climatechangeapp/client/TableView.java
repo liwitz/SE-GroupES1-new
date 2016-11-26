@@ -1,8 +1,6 @@
 package com.google.gwt.sample.climatechangeapp.client;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -19,7 +17,6 @@ import com.google.gwt.user.client.ui.FlexTable;
  * 			09-11-2016 LL Constructor corrected
  * 			12-11-2016 LW Insertion test data
  * 			13-11-2016 LW Change test data
- * 			26-11-2016 LW Add AsyncCallback and data import
  * @version 13-11-2016 LW Version 1
  * @responsabilities This class inititalizes the table and adds the data.
  *
@@ -29,8 +26,7 @@ public class TableView extends Composite{
 	
 	private DockLayoutPanel mainPanel = new DockLayoutPanel(Style.Unit.EM);
 	private FlexTable dataFlexTable = new FlexTable();
-	//private String[] data = {"01-08-2000","20.00","0.10", "New York", "United States of America", "44.99N", "74.56"};
-	private ReadCSVServiceAsync readSvc = GWT.create(ReadCSVService.class);
+	private String[] data = {"01-08-2000","20.00","0.10", "New York", "United States of America", "44.99N", "74.56"};
 	
 	public TableView() {
 		initialize();
@@ -65,21 +61,8 @@ public class TableView extends Composite{
 		dataFlexTable.getCellFormatter().addStyleName(0, 6, "tableNumericColumn");
 	
 		mainPanel.add(dataFlexTable);
-		// Initialize service proxy
-		if (readSvc == null){
-			readSvc = GWT.create(ReadCSVService.class);
-		}
-				
-		// Set up callback object
-		AsyncCallback<Data[]> callback = new AsyncCallback<Data[]>(){
-			public void onFailure(Throwable caught){
-						
-			}
-			public void onSuccess(Data[] data){
-				addData(data);		
-			}
-		};		
-		readSvc.readData("GlobalLandTemperaturesByMajorCity_v1.csv", callback);
+	
+		addData();
 	}
 	
 	/**
@@ -90,38 +73,14 @@ public class TableView extends Composite{
 	 * 
 	 */
 	
-	
-	private void addData(Data[] data){
+	private void addData(){
 		int row = dataFlexTable.getRowCount();
-		for(int i=0; i<1; i++){
-			for(int j=0; j<7; i++){
-				if(data[i] == null){
-					dataFlexTable.setText(row, j, "-");
-				}
-				else if(j==0){
-					dataFlexTable.setText(row, j, String.format("%1$tY-%1$tm-%1$td", data[i].getDate()));
-				}
-				else if(j==1){
-					dataFlexTable.setText(row, j, String.valueOf(data[i].getAverageTemp()));
-				}
-				else if(j==2){
-					dataFlexTable.setText(row, j, String.valueOf(data[i].getAverageTempUncertainty()));
-				}
-				else if(j==3){
-					dataFlexTable.setText(row, j, data[i].getCity());
-				}
-				else if(j==4){
-					dataFlexTable.setText(row, j, data[i].getCountry());
-				}
-				else if(j==5){
-					dataFlexTable.setText(row, j, String.valueOf(data[i].getLatitude()));
-				}
-				else if(j==6){
-					dataFlexTable.setText(row, j, String.valueOf(data[i].getLongitude()));
-				}
-				else{
-					dataFlexTable.setText(row, j, "-");
-				}
+		for(int i=0; i<7; i++){
+			if(data[i] == null){
+				dataFlexTable.setText(row, i, "-");
+			}
+			else{
+				dataFlexTable.setText(row, i, data[i]);
 			}
 		}
 	}
