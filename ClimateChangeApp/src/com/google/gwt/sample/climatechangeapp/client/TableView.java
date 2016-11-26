@@ -93,7 +93,37 @@ public class TableView extends Composite{
 	
 	private void addData(Data[] data){
 		int row = dataFlexTable.getRowCount();
-		for(int i=0; i<7; i++){
+		for(int i=0; i<1; i++){
+			for(int j=0; j<7; i++){
+				if(data[i] == null){
+					dataFlexTable.setText(row, j, "-");
+				}
+				else if(j==0){
+					dataFlexTable.setText(row, j, String.valueOf(data[i].getDate()));
+				}
+				else if(j==1){
+					dataFlexTable.setText(row, j, String.valueOf(data[i].getAverageTemp()));
+				}
+				else if(j==2){
+					dataFlexTable.setText(row, j, String.valueOf(data[i].getAverageTempUncertainty()));
+				}
+				else if(j==3){
+					dataFlexTable.setText(row, j, data[i].getCity());
+				}
+				else if(j==4){
+					dataFlexTable.setText(row, j, data[i].getCountry());
+				}
+				else if(j==5){
+					dataFlexTable.setText(row, j, String.valueOf(data[i].getLatitude()));
+				}
+				else if(j==6){
+					dataFlexTable.setText(row, j, String.valueOf(data[i].getLongitude()));
+				}
+				else{
+					dataFlexTable.setText(row, j, "-");
+				}
+			}
+			/*
 			if(data[i] == null){
 				dataFlexTable.setText(row, i, "-");
 			}
@@ -121,6 +151,7 @@ public class TableView extends Composite{
 			else{
 				dataFlexTable.setText(row, i, "-");
 			}
+			*/
 		}
 	}
 }

@@ -6,7 +6,7 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 @RemoteServiceRelativePath("read")
-public interface ReadCSVService {
+public interface ReadCSVService extends RemoteService{
 	Data[] readData(String filename);
 	Data getData(String[] split);
 	double convertDouble(String s);
