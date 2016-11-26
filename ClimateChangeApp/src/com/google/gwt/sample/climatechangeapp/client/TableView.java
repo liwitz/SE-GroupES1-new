@@ -99,7 +99,7 @@ public class TableView extends Composite{
 					dataFlexTable.setText(row, j, "-");
 				}
 				else if(j==0){
-					dataFlexTable.setText(row, j, String.valueOf(data[i].getDate()));
+					dataFlexTable.setText(row, j, String.format("%1$tY-%1$tm-%1$td", data[i].getDate()));
 				}
 				else if(j==1){
 					dataFlexTable.setText(row, j, String.valueOf(data[i].getAverageTemp()));
@@ -123,35 +123,6 @@ public class TableView extends Composite{
 					dataFlexTable.setText(row, j, "-");
 				}
 			}
-			/*
-			if(data[i] == null){
-				dataFlexTable.setText(row, i, "-");
-			}
-			else if(i==0){
-				dataFlexTable.setText(row, i, String.valueOf(data[i].getDate()));
-			}
-			else if(i==1){
-				dataFlexTable.setText(row, i, String.valueOf(data[i].getAverageTemp()));
-			}
-			else if(i==2){
-				dataFlexTable.setText(row, i, String.valueOf(data[i].getAverageTempUncertainty()));
-			}
-			else if(i==3){
-				dataFlexTable.setText(row, i, data[i].getCity());
-			}
-			else if(i==4){
-				dataFlexTable.setText(row, i, data[i].getCountry());
-			}
-			else if(i==5){
-				dataFlexTable.setText(row, i, String.valueOf(data[i].getLatitude()));
-			}
-			else if(i==6){
-				dataFlexTable.setText(row, i, String.valueOf(data[i].getLongitude()));
-			}
-			else{
-				dataFlexTable.setText(row, i, "-");
-			}
-			*/
 		}
 	}
 }
