@@ -99,7 +99,7 @@ public class TableView extends Composite{
 					dataFlexTable.setText(row, j, "-");
 				}
 				else if(j==0){
-					dataFlexTable.setText(row, j, String.format("%1$tY-%1$tm-%1$td", data[i].getDate()));
+					dataFlexTable.setText(row, j, String.valueOf(data[i].getDate()));
 				}
 				else if(j==1){
 					dataFlexTable.setText(row, j, String.valueOf(data[i].getAverageTemp()));
