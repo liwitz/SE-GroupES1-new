@@ -6,24 +6,24 @@
          xmlns="http://java.sun.com/xml/ns/javaee">
          
   <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.google.gwt.sample.climatechangeapp.server.GreetingServiceImpl</servlet-class>
-  </servlet>
+<!--   <servlet> -->
+<!--     <servlet-name>greetServlet</servlet-name> -->
+<!--     <servlet-class>com.google.gwt.sample.climatechangeapp.server.GreetingServiceImpl</servlet-class> -->
+<!--   </servlet> -->
   
   <servlet>
       <servlet-name>readCSVServlet</servlet-name>
       <servlet-class>com.google.gwt.sample.climatechangeapp.server.ReadCSVServiceImpl</servlet-class>
   </servlet>
   
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/climatechangeapp/greet</url-pattern>
-  </servlet-mapping>
+<!--   <servlet-mapping> -->
+<!--     <servlet-name>greetServlet</servlet-name> -->
+<!--     <url-pattern>/climatechangeapp/greet</url-pattern> -->
+<!--   </servlet-mapping> -->
   
   <servlet-mapping>
       <servlet-name>readCSVServlet</servlet-name>
-      <url-pattern>/com.google.gwt.sample.ClimateChangeApp/read</url-pattern>
+      <url-pattern>/climatechangeapp/read/</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->

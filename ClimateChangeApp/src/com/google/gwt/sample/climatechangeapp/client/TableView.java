@@ -32,6 +32,7 @@ public class TableView extends Composite{
 	//private String[] data = {"01-08-2000","20.00","0.10", "New York", "United States of America", "44.99N", "74.56"};
 	private ReadCSVServiceAsync readSvc = (ReadCSVServiceAsync) GWT.create(ReadCSVService.class);
 	
+	
 	public TableView() {
 		initialize();
 		initWidget(mainPanel);
@@ -68,6 +69,7 @@ public class TableView extends Composite{
 		// Initialize service proxy
 		if (readSvc == null){
 			readSvc = GWT.create(ReadCSVService.class);
+			
 		}
 		
 		addData();
