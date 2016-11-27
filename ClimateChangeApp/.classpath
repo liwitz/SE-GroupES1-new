@@ -2,16 +2,32 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" output="test-classes" path="test"/>
-	<classpathentry exported="true" kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 	<classpathentry exported="true" kind="lib" path="war/WEB-INF/lib/gwt-charts-0.9.8.jar"/>
 	<classpathentry exported="true" kind="lib" path="war/WEB-INF/lib/gwtbootstrap3-0.9.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="war/WEB-INF/lib/gwtbootstrap3-extras-0.9.1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-slider-bar-1.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-incubator-20101117-r1766.jar"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
-	<classpathentry exported="true" kind="lib" path="war/WEB-INF/lib/gwt-servlet-2.8.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Carla/Downloads/Eclipse 3.app/Contents/Eclipse/plugins/com.google.gwt.eclipse.sdkbundle_2.7.0/gwt-2.7.0/gwt-user.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/Users/Carla/Downloads/Eclipse%203.app/Contents/Eclipse/plugins/com.google.gwt.eclipse.sdkbundle_2.7.0/gwt-2.7.0/doc/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/Carla/Downloads/Eclipse 3.app/Contents/Eclipse/plugins/com.google.gwt.eclipse.sdkbundle_2.7.0/gwt-2.7.0/gwt-codeserver.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/Users/Carla/Downloads/Eclipse%203.app/Contents/Eclipse/plugins/com.google.gwt.eclipse.sdkbundle_2.7.0/gwt-2.7.0/doc/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/Carla/Downloads/Eclipse 3.app/Contents/Eclipse/plugins/com.google.gwt.eclipse.sdkbundle_2.7.0/gwt-2.7.0/gwt-dev.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/Users/Carla/Downloads/Eclipse%203.app/Contents/Eclipse/plugins/com.google.gwt.eclipse.sdkbundle_2.7.0/gwt-2.7.0/doc/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/Carla/Downloads/Eclipse 3.app/Contents/Eclipse/plugins/com.google.gwt.eclipse.sdkbundle_2.7.0/gwt-2.7.0/validation-api-1.0.0.GA-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/Carla/Downloads/Eclipse 3.app/Contents/Eclipse/plugins/com.google.gwt.eclipse.sdkbundle_2.7.0/gwt-2.7.0/validation-api-1.0.0.GA.jar" sourcepath="/Users/Carla/Downloads/Eclipse 3.app/Contents/Eclipse/plugins/com.google.gwt.eclipse.sdkbundle_2.7.0/gwt-2.7.0/validation-api-1.0.0.GA-sources.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
