@@ -6,10 +6,11 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import com.google.gwt.i18n.shared.DateTimeFormat;
 import com.google.gwt.sample.climatechangeapp.client.Data;
 import com.google.gwt.sample.climatechangeapp.client.ReadCSVService;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import com.google.gwt.i18n.client.DateTimeFormat;
 
 public class ReadCSVServiceImpl extends RemoteServiceServlet implements ReadCSVService {
 
@@ -108,10 +109,20 @@ public class ReadCSVServiceImpl extends RemoteServiceServlet implements ReadCSVS
 
 	@Override
 	public Date convertDate(String s) {
-		Date startDate = DateTimeFormat.getFormat("yyyy-MM-dd").parse(s);
+		
+		Date date = null;
+	    try {
+	        DateTimeFormat dateTimeFormat = DateTimeFormat.getFormat("yyyy-MM-dd");
+	        date = dateTimeFormat.parse(s);
+	    } 
+	    catch (Exception e)
+	    {
+	        // ignore
+	    }
+	    return date;
 		
 		/*
-		SimpleDateFormat df= new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 		Date startDate= null;
 		try {
 			startDate = df.parse(s);
@@ -119,7 +130,6 @@ public class ReadCSVServiceImpl extends RemoteServiceServlet implements ReadCSVS
 		catch (Exception e) {
 		}
 		*/
-		return startDate;
 	}
 
 }

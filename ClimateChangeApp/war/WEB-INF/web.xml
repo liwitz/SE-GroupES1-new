@@ -23,7 +23,7 @@
   
   <servlet-mapping>
       <servlet-name>readCSVServlet</servlet-name>
-      <url-pattern>/climatechangeapp/read</url-pattern>
+      <url-pattern>/com.google.gwt.sample.ClimateChangeApp/read</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->

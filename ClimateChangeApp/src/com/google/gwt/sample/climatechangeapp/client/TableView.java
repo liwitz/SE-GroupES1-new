@@ -30,7 +30,7 @@ public class TableView extends Composite{
 	private DockLayoutPanel mainPanel = new DockLayoutPanel(Style.Unit.EM);
 	private FlexTable dataFlexTable = new FlexTable();
 	//private String[] data = {"01-08-2000","20.00","0.10", "New York", "United States of America", "44.99N", "74.56"};
-	private ReadCSVServiceAsync readSvc = GWT.create(ReadCSVService.class);
+	private ReadCSVServiceAsync readSvc = (ReadCSVServiceAsync) GWT.create(ReadCSVService.class);
 	
 	public TableView() {
 		initialize();
@@ -69,7 +69,10 @@ public class TableView extends Composite{
 		if (readSvc == null){
 			readSvc = GWT.create(ReadCSVService.class);
 		}
-				
+		
+		addData();
+		
+		/*
 		// Set up callback object
 		AsyncCallback<Data[]> callback = new AsyncCallback<Data[]>(){
 			public void onFailure(Throwable caught){
@@ -78,8 +81,11 @@ public class TableView extends Composite{
 			public void onSuccess(Data[] data){
 				addData(data);		
 			}
-		};		
+		};
+			
+		
 		readSvc.readData("GlobalLandTemperaturesByMajorCity_v1.csv", callback);
+		*/
 	}
 	
 	/**
@@ -90,8 +96,49 @@ public class TableView extends Composite{
 	 * 
 	 */
 	
-	
-	private void addData(Data[] data){
+	public void addData(){
+		readSvc.readData("GlobalLandTemperaturesByMajorCity_v1.csv", new AsyncCallback<Data[]>(){
+			public void onFailure(Throwable caught) {
+	              
+	        }
+
+	        public void onSuccess(Data[] data) {
+	          	int row = dataFlexTable.getRowCount();
+	       		for(int i=0; i<1; i++){
+	        		for(int j=0; j<7; i++){
+	        			if(data[i] == null){
+	        				dataFlexTable.setText(row, j, "-");
+	        			}
+	        			else if(j==0){
+	        				dataFlexTable.setText(row, j, String.valueOf(data[i].getDate()));
+	        			}
+	        			else if(j==1){
+	        				dataFlexTable.setText(row, j, String.valueOf(data[i].getAverageTemp()));
+	        			}
+	        			else if(j==2){
+	        				dataFlexTable.setText(row, j, String.valueOf(data[i].getAverageTempUncertainty()));
+	        			}
+	        			else if(j==3){
+	        				dataFlexTable.setText(row, j, data[i].getCity());
+	        			}
+	        			else if(j==4){
+	        				dataFlexTable.setText(row, j, data[i].getCountry());
+	        			}
+	        			else if(j==5){
+	        				dataFlexTable.setText(row, j, String.valueOf(data[i].getLatitude()));
+	        			}
+	        			else if(j==6){
+	        				dataFlexTable.setText(row, j, String.valueOf(data[i].getLongitude()));
+	        			}
+	        			else{
+	        				dataFlexTable.setText(row, j, "-");
+	        			}
+	        		}
+	        	}
+	       	}
+	   });
+	}
+	/*private void addData(Data[] data){
 		int row = dataFlexTable.getRowCount();
 		for(int i=0; i<1; i++){
 			for(int j=0; j<7; i++){
@@ -124,5 +171,5 @@ public class TableView extends Composite{
 				}
 			}
 		}
-	}
+	}*/
 }
