@@ -18,25 +18,29 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.ToggleButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.widgetideas.client.SliderBar;
+import com.google.gwt.widgetideas.client.SliderBar.LabelFormatter;
 
 
-import org.gwtbootstrap3.extras.slider.client.ui.Range;
+
+/**import org.gwtbootstrap3.extras.slider.client.ui.Range;
 import org.gwtbootstrap3.extras.slider.client.ui.Slider;
 import org.gwtbootstrap3.extras.slider.client.ui.base.event.SlideStopEvent;
 import org.gwtbootstrap3.extras.slider.client.ui.base.event.SlideStopHandler;
+*/
 
-
-public class WorldMapMenu extends DockLayoutPanel {
+public class WorldMapMenu extends VerticalPanel {
 	// create panels
 	
 	private VerticalPanel sliderPanel= new VerticalPanel();
-	private HorizontalPanel listPanel= new HorizontalPanel();
+	private VerticalPanel listPanel= new VerticalPanel();
 	private VerticalPanel countryPanel = new VerticalPanel();
 	private VerticalPanel cityPanel = new VerticalPanel();
 	private VerticalPanel yearPanel = new VerticalPanel();
 	private VerticalPanel tempPanel = new VerticalPanel();
 	private HorizontalPanel uncertaintyPanel = new HorizontalPanel();
 	private VerticalPanel uncertaintySliderPanel= new VerticalPanel();
+	
 	
 	// create listboxes and their labels
 	private ListBox chooseCountry= new ListBox();
@@ -46,19 +50,27 @@ public class WorldMapMenu extends DockLayoutPanel {
 	
 	
 	// create sliders and their labels
-	private Slider yearSlider= new Slider();
+	//private SliderBar yearSlider= new SliderBar(5,10);
+	
+	 private SliderBar yearSlider = new SliderBar(0.0, 200.0,
+		        new LabelFormatter() {
+		          public String formatLabel(SliderBar slider, double value) {
+		              return (int) (10 * value) / 10.0 + "";
+		          }
+		        });
+	 
 	private Label yearLabel= new Label("Year");
-//	private RangeSlider tempSlider= new RangeSlider();
+	private SliderBar tempSlider= new SliderBar(5,10);
 	private Label tempLabel= new Label("Temperature");
-//	private RangeSlider tempUncertaintySlider= new RangeSlider();
+	private SliderBar tempUncertaintySlider= new SliderBar(5,10);
 	private Label tempUncertaintyLabel= new Label("Uncertainty");
 	private ToggleButton hideUncertainty = new ToggleButton("Hide uncertain Data");
 	
 	
 	public WorldMapMenu(){
-		super(Style.Unit.EM);
+		super();
 		fillPanels();
-		addWest(sliderPanel,30);
+		add(sliderPanel);
 		add(listPanel);
 		
 		//handleEvents();
@@ -115,11 +127,12 @@ public class WorldMapMenu extends DockLayoutPanel {
 		//styleSlider();
 		//Add everything in slidePanel
 		yearPanel.add(yearLabel);
-	//	yearPanel.add(yearSlider);
+		yearSlider.setVisible(true);
+		yearPanel.add(yearSlider);
 		tempPanel.add(tempLabel);
-	//	tempPanel.add(tempSlider);
+		tempPanel.add(tempSlider);
 		uncertaintySliderPanel.add(tempUncertaintyLabel);
-	//	uncertaintySliderPanel.add(tempUncertaintySlider);
+		uncertaintySliderPanel.add(tempUncertaintySlider);
 		uncertaintyPanel.add(uncertaintySliderPanel);
 		uncertaintyPanel.add(hideUncertainty);
 		sliderPanel.add(yearPanel);

@@ -19,8 +19,6 @@ import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 //import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
-import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.user.client.ui.Button;
 //import com.google.gwt.user.client.ui.TextBox;
 //import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
@@ -43,6 +41,8 @@ public class ClimateChangeApp extends TabLayoutPanel implements EntryPoint {
 	private TableView tableView = new TableView();
 	private WorldMapMenu worldMapMenu = new WorldMapMenu();
 	private DockLayoutPanel dockLayoutPanel = new DockLayoutPanel(Style.Unit.EM);
+	private Timeline timeline= new Timeline(50,"100px");
+
 	
 	
 	//private Button exportButton= new Button("Export data");
@@ -53,14 +53,15 @@ public class ClimateChangeApp extends TabLayoutPanel implements EntryPoint {
 		super(9, Style.Unit.EM);
 		//Creates TabLayoutPanel with two tabs
 		
-		
+
 		add(dockLayoutPanel, "World Map");
 		add(tableView, "Data Table");
+		add(timeline,"timeline");
 		addStyleName("tabs");
 		selectTab(0);
 
 		//Add tabPanel to north
-		dockLayoutPanel.addSouth(worldMapMenu,10);
+		dockLayoutPanel.addEast(worldMapMenu,15);
 		dockLayoutPanel.add(worldMapView);
 		//addSouth(exportButton, 10);
 	}
