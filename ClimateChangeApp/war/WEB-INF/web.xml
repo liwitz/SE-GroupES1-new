@@ -12,8 +12,8 @@
 <!--   </servlet> -->
   
   <servlet>
-      <servlet-name>readCSVServlet</servlet-name>
-      <servlet-class>com.google.gwt.sample.climatechangeapp.server.ReadCSVServiceImpl</servlet-class>
+      <servlet-name>DataServlet</servlet-name>
+      <servlet-class>com.google.gwt.sample.climatechangeapp.server.DataServiceImpl</servlet-class>
   </servlet>
   
 <!--   <servlet-mapping> -->
@@ -22,8 +22,8 @@
 <!--   </servlet-mapping> -->
   
   <servlet-mapping>
-      <servlet-name>readCSVServlet</servlet-name>
-      <url-pattern>/climatechangeapp/read/</url-pattern>
+      <servlet-name>DataServlet</servlet-name>
+      <url-pattern>/climatechangeapp/data/</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->
