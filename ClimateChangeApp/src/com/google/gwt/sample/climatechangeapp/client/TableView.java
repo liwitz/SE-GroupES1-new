@@ -35,14 +35,14 @@ public class TableView extends Composite{
 	
 	private DockLayoutPanel mainPanel = new DockLayoutPanel(Style.Unit.EM);
 	private FlexTable dataFlexTable = new FlexTable();
-	private HorizontalPanel addPanel = new HorizontalPanel();	//me
-	private TextBox addTextBox = new TextBox();	//me
-	private Button addFilterButton = new Button("Filter");	//me
-	private Button addResetButton = new Button("Reset");	//me
-	private ListBox filterOption = new ListBox();	//me
+	private HorizontalPanel addPanel = new HorizontalPanel();
+	private TextBox addTextBox = new TextBox();
+	private Button addFilterButton = new Button("Filter");
+	private Button addResetButton = new Button("Reset");
+	private ListBox filterOption = new ListBox();
 	//private String[] data = {"01-08-2000","20.00","0.10", "New York", "United States of America", "44.99N", "74.56"};
-	private Data[] data = new Data[10];	//me
-	TableFilter filterObject = new TableFilter(data);	//me
+	private Data[] data = new Data[10];
+	TableFilter filterObject = new TableFilter(data);
 	private ReadCSVServiceAsync readSvc = (ReadCSVServiceAsync) GWT.create(ReadCSVService.class);
 	
 	public TableView() {
@@ -84,14 +84,14 @@ public class TableView extends Composite{
 		filterOption.addItem("city");
 		filterOption.addItem("country");
 		addPanel.add(filterOption);
-		addPanel.add(addTextBox);	//me
-		addPanel.add(addFilterButton);	//me
-		addPanel.add(addResetButton);	//me
-		mainPanel.addNorth(addPanel, 3);	//me
+		addPanel.add(addTextBox);
+		addPanel.add(addFilterButton);
+		addPanel.add(addResetButton);
+		mainPanel.addNorth(addPanel, 3);
 		mainPanel.add(dataFlexTable);
 		
 		// Move cursor focus to the input box.
-		addTextBox.setFocus(true);	//me
+		addTextBox.setFocus(true);
 		// Initialize service proxy
 		if (readSvc == null){
 			readSvc = GWT.create(ReadCSVService.class);
