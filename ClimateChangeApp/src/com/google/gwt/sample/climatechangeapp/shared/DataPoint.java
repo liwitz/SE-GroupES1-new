@@ -15,14 +15,14 @@ public class DataPoint implements IsSerializable{
 	private String latitude;
 	private String longitude;
 	private double averageTemperature;
-	private double uncertainity;
+	private double uncertainty;
 	private Date date;
 	
 /*Empty constructor needed for serialization*/
 public DataPoint(){}
 
 public DataPoint(int id, int year, int month,String region, String country, String latitude, String longitude, double averageTemperature,
-		double uncertainity) {
+		double uncertainty) {
 		super();
 		this.id = id;
 		this.year = year;
@@ -32,7 +32,7 @@ public DataPoint(int id, int year, int month,String region, String country, Stri
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.averageTemperature = averageTemperature;
-		this.uncertainity = uncertainity;
+		this.uncertainty = uncertainty;
 	}
 
 	public int getMonth() {
@@ -78,11 +78,11 @@ public DataPoint(int id, int year, int month,String region, String country, Stri
 	public void setAverageTemperature(double averageTemperature) {
 		this.averageTemperature = averageTemperature;
 	}
-	public double getUncertainity() {
-		return uncertainity;
+	public double getUncertainty() {
+		return uncertainty;
 	}
-	public void setUncertainity(double uncertainity) {
-		this.uncertainity = uncertainity;
+	public void setUncertainty(double uncertainty) {
+		this.uncertainty = uncertainty;
 	}
 	public String getRegion() {
 		return region;

@@ -173,7 +173,7 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
 				p.setCountry(tmpCountry);
 				p.setRegion(tmpCity);
 				p.setAverageTemperature(temp);
-				p.setUncertainity(uncertainity);
+				p.setUncertainty(uncertainty);
 				p.setDate(date);
 				
 				data.add(p);		
@@ -186,8 +186,8 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
 		return data;
 	}
 
-	@Override
-	public ArrayList<DataPoint> getCountryList() {
+//	@Override
+/**	public ArrayList<DataPoint> getCountryList() {
 		Connection connection = getConnection();
 		PreparedStatement statement = null;
 		ResultSet result;
@@ -240,5 +240,5 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
 		}
 		
 		return data;
-	}
+	}*/
 }

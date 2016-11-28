@@ -1,5 +1,7 @@
 package com.google.gwt.sample.climatechangeapp.client;
 
+import java.util.ArrayList;
+
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.dom.client.Style;
 //import com.googlecode.gwt.charts.client.*;
@@ -9,8 +11,12 @@ import com.googlecode.gwt.charts.client.ColumnType;
 import com.googlecode.gwt.charts.client.DataTable;
 import com.googlecode.gwt.charts.client.geochart.GeoChart;
 import com.googlecode.gwt.charts.client.options.DisplayMode;
+
+import com.google.gwt.sample.climatechangeapp.shared.DataPoint;
+
 import com.googlecode.gwt.charts.client.geochart.GeoChartColorAxis;
 import com.googlecode.gwt.charts.client.geochart.GeoChartOptions;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 	
@@ -28,10 +34,17 @@ import com.google.gwt.user.client.ui.DockLayoutPanel;
  *
  */
 	
-public class WorldMapView extends Composite{
+public class WorldMapView extends DataView{
 
 	private DockLayoutPanel mainPanel = new DockLayoutPanel(Style.Unit.PX);
 	private GeoChart geoChart;
+	private int currentYear=2013;
+	private double maxTemperature=40;
+	private double minTemperature=-30;
+	private double uncertainty=15;
+	//all the cities and countries will be shown
+	private String city="city";
+	private String country="country";
 
 	// Create the MapView
 	public WorldMapView() {
@@ -73,34 +86,23 @@ public class WorldMapView extends Composite{
 		// Prepare the data 
 		// TODO: Function, which gets the right data form the list.
 
-		DataTable dataTable = DataTable.create();
-		dataTable.addColumn(ColumnType.STRING, "City");
-		dataTable.addColumn(ColumnType.NUMBER, "Temperature");
-		dataTable.addRows(12);
-		dataTable.setValue(0, 0, "Rome");
-		dataTable.setValue(0, 1, 25);
-		dataTable.setValue(1, 0, "Paris");
-		dataTable.setValue(1, 1, 15);
-		dataTable.setValue(2, 0, "New York");
-		dataTable.setValue(2, 1, 10);
-		dataTable.setValue(3, 0, "Hong Kong");
-		dataTable.setValue(3, 1, 28);
-		dataTable.setValue(4, 0, "Sydney");
-		dataTable.setValue(4, 1, 32);
-		dataTable.setValue(5, 0, "Miami");
-		dataTable.setValue(5, 1, 27);
-		dataTable.setValue(6, 0, "Istanbul");
-		dataTable.setValue(6, 1, 27);
-		dataTable.setValue(7, 0, "Oslo");
-		dataTable.setValue(7, 1, -5);
-		dataTable.setValue(8, 0, "Vancouver");
-		dataTable.setValue(8, 1, -2);
-		dataTable.setValue(9, 0, "Buenos Aires");
-		dataTable.setValue(9, 1, 12);
-		dataTable.setValue(10, 0, "Kapstadt");
-		dataTable.setValue(10, 1, 0);
-		dataTable.setValue(11, 0, "Tokyo");
-		dataTable.setValue(11, 1, 3);
+		if (getData() != null) {
+
+			DataTable dataTable = DataTable.create();
+			dataTable.addColumn(ColumnType.STRING, "City");
+			dataTable.addColumn(ColumnType.NUMBER, "Temperature");
+			dataTable.addColumn(ColumnType.NUMBER,"Uncertainty");
+
+			dataTable.addRows(getData().size());
+			for (int i = 0; i < getData().size(); i++) {
+
+				dataTable.setValue(i, 0, getData().get(i).getRegion());
+				dataTable.setValue(i, 1, getData().get(i).getAverageTemperature());
+				dataTable.setValue(i, 2, getData().get(i).getUncertainty());
+
+			}
+			
+			
 			
 		// set geochart options
 		GeoChartOptions options = GeoChartOptions.create();
@@ -112,6 +114,7 @@ public class WorldMapView extends Composite{
 			
 			
 		geoChart.draw(dataTable, options);
+		}
 	}
 
 	/**
@@ -122,9 +125,32 @@ public class WorldMapView extends Composite{
 	 * @return	returns array with colors for markers
 	 * 
 	 */
+	public void fetchData() {
+		AsyncCallback<ArrayList<DataPoint>> callback = new AsyncCallback<ArrayList<DataPoint>>() {
+
+			@Override
+			public void onSuccess(ArrayList<DataPoint> result) {
+				setData(result);
+				draw();
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Do something
+			}
+		};
+
+		// call to server with the correct attributes (default at the beginning)
+		getDataService().getMapData(currentYear,minTemperature,maxTemperature,uncertainty,city,country,callback);
+	}
+	
 
 	private native JsArrayString getNativeArray() /*-{
 		return [ "0000FF", "5858FA", "A9A9F5", "F7819F", "FE2E64", "FF0040" ];
 	}-*/;
-
+	
+	public void fetchCountryList() {
+		// TODO Auto-generated method stub
+		
+	}
 }
