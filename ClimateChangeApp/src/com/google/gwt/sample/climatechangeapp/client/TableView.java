@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Button;
 //import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -38,6 +39,7 @@ public class TableView extends Composite{
 	private TextBox addTextBox = new TextBox();	//me
 	private Button addFilterButton = new Button("Filter");	//me
 	private Button addResetButton = new Button("Reset");	//me
+	private ListBox filterOption = new ListBox();	//me
 	//private String[] data = {"01-08-2000","20.00","0.10", "New York", "United States of America", "44.99N", "74.56"};
 	private Data[] data = new Data[10];	//me
 	TableFilter filterObject = new TableFilter(data);	//me
@@ -75,6 +77,13 @@ public class TableView extends Composite{
 		dataFlexTable.getCellFormatter().addStyleName(0, 5, "tableNumericColumn");
 		dataFlexTable.getCellFormatter().addStyleName(0, 6, "tableNumericColumn");
 	
+		filterOption.addItem("year");
+		filterOption.addItem("month");
+		filterOption.addItem("day");
+		filterOption.addItem("average Temperature");
+		filterOption.addItem("city");
+		filterOption.addItem("country");
+		addPanel.add(filterOption);
 		addPanel.add(addTextBox);	//me
 		addPanel.add(addFilterButton);	//me
 		addPanel.add(addResetButton);	//me
