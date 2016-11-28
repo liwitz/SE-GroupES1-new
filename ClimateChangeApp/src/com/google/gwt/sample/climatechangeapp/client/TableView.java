@@ -57,8 +57,6 @@ public class TableView extends Composite{
 	 */
 	
 	private void initialize(){
-		data[0].setCountry("test1");	//me@test
-		data[1].setCountry("test2");	//me@test
 		dataFlexTable.setText(0, 0, "Date");
 		dataFlexTable.setText(0, 1, "Average Temperature");
 		dataFlexTable.setText(0, 2, "Average Temperature Uncertainty");
@@ -83,7 +81,7 @@ public class TableView extends Composite{
 		mainPanel.addNorth(addPanel, 3);	//me
 		mainPanel.add(dataFlexTable);
 		
-		// Move curson focus to the input box.
+		// Move cursor focus to the input box.
 		addTextBox.setFocus(true);	//me
 		// Initialize service proxy
 		if (readSvc == null){
@@ -115,6 +113,7 @@ public class TableView extends Composite{
 				filterObject.filterByCountry("test");
 			}
 		});
+		
 	}
 	
 	/**
