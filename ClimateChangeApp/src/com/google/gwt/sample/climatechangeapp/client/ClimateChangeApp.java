@@ -58,7 +58,7 @@ public class ClimateChangeApp extends DockLayoutPanel implements EntryPoint {
 
 		//Add tabPanel to north
 		addNorth(menu,40);
-		//addSouth(exportButton, 10);
+		//addSouth(selection, 15);
 	}
 	
 	/*

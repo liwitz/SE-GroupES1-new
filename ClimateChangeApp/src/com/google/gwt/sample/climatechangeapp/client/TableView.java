@@ -83,7 +83,7 @@ public class TableView extends Composite{
 	public void addData(){
 	          	
 	}
-	/*private void addData(Data[] data){
+	/*public void addData(Data[] data){
 		int row = dataFlexTable.getRowCount();
 		for(int i=0; i<1; i++){
 			for(int j=0; j<7; i++){
