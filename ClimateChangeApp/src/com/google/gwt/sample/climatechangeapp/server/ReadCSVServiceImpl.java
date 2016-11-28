@@ -67,7 +67,8 @@ public class ReadCSVServiceImpl extends RemoteServiceServlet implements ReadCSVS
 		for (int i = 0; i < headers.length; i++) {
 			try {
 				if (headers[i] != null && headers[i].equalsIgnoreCase(DATE)) {
-					model.setDate(convertDate(split[i]));
+					model.setYear(convertYear(split[i]));
+					model.setMonth(convertMonth(split[i]));
 				}
 				else if (headers[i] != null && headers[i].equalsIgnoreCase(AVERAGETEMPERATURE)) {
 					model.setAverageTemp(convertDouble(split[i]));
@@ -107,7 +108,30 @@ public class ReadCSVServiceImpl extends RemoteServiceServlet implements ReadCSVS
 		return value;
 	}
 
-	@Override
+	public double convertYear(String s) {
+		String yearString= s.substring(0, 4);
+		double value = 0.0;
+		try {
+			value = Double.parseDouble(yearString);
+		}
+		catch (Exception e) {
+		}
+		return value;
+	}
+	
+	public double convertMonth(String s) {
+		String monthString= s.substring(6, 8);
+		double value = 0.0;
+		try {
+			value = Double.parseDouble(monthString);
+		}
+		catch (Exception e) {
+		}
+		return value;
+	}
+	
+	
+/**	@Override
 	public Date convertDate(String s) {
 		
 		Date date = null;
@@ -129,7 +153,7 @@ public class ReadCSVServiceImpl extends RemoteServiceServlet implements ReadCSVS
 		}
 		catch (Exception e) {
 		}
-		*/
-	}
+		
+	}*/
 
 }

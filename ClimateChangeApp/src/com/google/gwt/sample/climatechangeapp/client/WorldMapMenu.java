@@ -23,6 +23,7 @@ import com.google.gwt.widgetideas.client.SliderBar.LabelFormatter;
 
 
 
+
 /**import org.gwtbootstrap3.extras.slider.client.ui.Range;
 import org.gwtbootstrap3.extras.slider.client.ui.Slider;
 import org.gwtbootstrap3.extras.slider.client.ui.base.event.SlideStopEvent;

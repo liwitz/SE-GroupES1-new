@@ -97,7 +97,7 @@ public class TableView extends Composite{
 	 */
 	
 	public void addData(){
-		readSvc.readData("GlobalLandTemperaturesByMajorCity_v1.csv", new AsyncCallback<Data[]>(){
+		readSvc.readData("temperatures.csv", new AsyncCallback<Data[]>(){
 			public void onFailure(Throwable caught) {
 	              
 	        }
@@ -110,7 +110,7 @@ public class TableView extends Composite{
 	        				dataFlexTable.setText(row, j, "-");
 	        			}
 	        			else if(j==0){
-	        				dataFlexTable.setText(row, j, String.valueOf(data[i].getDate()));
+	        				dataFlexTable.setText(row, j, String.valueOf(data[i].getYear())+ "-"+ String.valueOf(data[i].getMonth()));
 	        			}
 	        			else if(j==1){
 	        				dataFlexTable.setText(row, j, String.valueOf(data[i].getAverageTemp()));

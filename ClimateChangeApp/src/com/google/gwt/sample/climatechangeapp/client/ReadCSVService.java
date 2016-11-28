@@ -10,5 +10,6 @@ public interface ReadCSVService extends RemoteService{
 	Data[] readData(String filename);
 	Data getData(String[] split);
 	double convertDouble(String s);
-	Date convertDate(String s);
+	double convertYear(String s);
+	double convertMonth(String s);
 }

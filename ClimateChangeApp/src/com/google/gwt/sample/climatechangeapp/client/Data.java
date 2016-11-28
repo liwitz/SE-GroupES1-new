@@ -1,15 +1,21 @@
 package com.google.gwt.sample.climatechangeapp.client;
 
 import java.io.BufferedReader;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.io.FileReader;
 import java.util.Date;
+
+
 import java.io.Serializable;
 
 public class Data implements Serializable { 
 	
 	//dt,AverageTemperature,AverageTemperatureUncertainty,City,Country,Latitude,Longitude
 
-	private Date dt;
+	private double year;
+	private double month;
 	private double averageTemperature;
 	private double averageTemperatureUncertainty;
 	private String city;
@@ -17,13 +23,20 @@ public class Data implements Serializable {
 	private double latitude;
 	private double longitude;
 
-	public Date getDate() {
-	    return dt;
+	public double getYear() {
+	    return year;
 	}
-	public void setDate(Date dt) {
-	    this.dt= dt;
+	public void setYear(double year) {
+	    this.year= year;
 	}
 
+	public double getMonth() {
+	    return month;
+	}
+	public void setMonth(double month) {
+	    this.month= month;
+	}
+	
 	public double getAverageTemp() {
 	    return averageTemperature;
 	}
@@ -72,8 +85,8 @@ public class Data implements Serializable {
 	    this.longitude= longitude;
 	}
 	
-//	public Data [] getData(){
-		// TODO auto-generated method stub
-	//}
+	//public Data [] getDataByYear(){
+			// TODO auto-generated method stub
+		//}
 	
 }

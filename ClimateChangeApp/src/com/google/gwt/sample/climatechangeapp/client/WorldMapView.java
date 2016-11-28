@@ -1,5 +1,6 @@
 package com.google.gwt.sample.climatechangeapp.client;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.dom.client.Style;
 //import com.googlecode.gwt.charts.client.*;
@@ -11,8 +12,10 @@ import com.googlecode.gwt.charts.client.geochart.GeoChart;
 import com.googlecode.gwt.charts.client.options.DisplayMode;
 import com.googlecode.gwt.charts.client.geochart.GeoChartColorAxis;
 import com.googlecode.gwt.charts.client.geochart.GeoChartOptions;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 	
 /**
  * 
@@ -32,6 +35,8 @@ public class WorldMapView extends Composite{
 
 	private DockLayoutPanel mainPanel = new DockLayoutPanel(Style.Unit.PX);
 	private GeoChart geoChart;
+	private DataTable dataTable= DataTable.create();
+	//private Filter filter= new Filter();
 
 	// Create the MapView
 	public WorldMapView() {
@@ -56,7 +61,7 @@ public class WorldMapView extends Composite{
 				// Create and attach the chart
 				geoChart = new GeoChart();
 				mainPanel.add(geoChart);
-				draw();
+				draw(2013);
 			}
 		});
 	}
@@ -69,14 +74,23 @@ public class WorldMapView extends Composite{
 	 * 
 	 */
 		
-	private void draw() {
+	private void draw(int year) {
 		// Prepare the data 
 		// TODO: Function, which gets the right data form the list.
 
-		DataTable dataTable = DataTable.create();
 		dataTable.addColumn(ColumnType.STRING, "City");
 		dataTable.addColumn(ColumnType.NUMBER, "Temperature");
-		dataTable.addRows(12);
+		dataTable.addColumn(ColumnType.NUMBER,"Uncertainty");
+		
+	/*	Data[] data= filter.getDataByYear(year);
+		int numberOfRows=data.length;
+		dataTable.addRows(numberOfRows);
+		for(int i=0;i<numberOfRows;i++){
+			dataTable.setValue(i,0, data[i].getCity());
+			dataTable.setValue(i,1, data[i].getAverageTemp());
+			dataTable.setValue(i,2, data[i].getAverageTempUncertainty());
+		}
+		*/
 		dataTable.setValue(0, 0, "Rome");
 		dataTable.setValue(0, 1, 25);
 		dataTable.setValue(1, 0, "Paris");
