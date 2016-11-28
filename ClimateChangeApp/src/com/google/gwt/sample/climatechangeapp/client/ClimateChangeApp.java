@@ -1,6 +1,5 @@
 package com.google.gwt.sample.climatechangeapp.client;
 
-
 import com.google.gwt.core.client.EntryPoint;
 //import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style;
@@ -28,9 +27,14 @@ import com.google.gwt.user.client.ui.DockLayoutPanel;
  * The class ClimateChangeApp generates the UI.
  * 
  * @author Sophy Chhong
+ * 
  * @history 11-11-2016 SC Constructor & onModuleLoad
  * 			12-11-2016 SC Constructor corrected
+ * 			26-11-2016 SC Adding World Map Menu
+ * 			
  * @version 12-11-2016 SC Version 1
+ * 			26-11-2016 SC Version 2
+ * 
  * @responsabilities This class creates tabs including the world map and the data table.
  *
  */
@@ -42,17 +46,13 @@ public class ClimateChangeApp extends TabLayoutPanel implements EntryPoint {
 	private WorldMapMenu worldMapMenu = new WorldMapMenu();
 	private DockLayoutPanel dockLayoutPanel = new DockLayoutPanel(Style.Unit.EM);
 	
-	//private Button exportButton= new Button("Export data");
-	//private Data data;
-	
 	public ClimateChangeApp(){
 		
 		//Creates TabLayoutPanel
 		super(9, Style.Unit.EM);
 		worldMapMenu.setHeight("100%");		
+		
 		//Creates TabLayoutPanel with two tabs
-		
-		
 		add(dockLayoutPanel, "World Map");
 		add(tableView, "Data Table");
 		addStyleName("tabs");
@@ -60,8 +60,6 @@ public class ClimateChangeApp extends TabLayoutPanel implements EntryPoint {
 		
 		dockLayoutPanel.addEast(worldMapMenu,15);
 		dockLayoutPanel.add(worldMapView);
-		//Add tabPanel to north
-		//addSouth(exportButton, 10);
 	}
 	
 	/*

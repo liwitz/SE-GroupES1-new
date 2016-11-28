@@ -4,6 +4,21 @@ import java.sql.Date;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+/**
+ * 
+ * The class DataPoint to request data and for ArrayLists.
+ * 
+ * @author Lina Witzel
+ * 
+ * @history 24-11-2016 LW Set Up
+ * 			26-11-2016 LL Adding getters and setters
+ * 
+ * @version 26-11-2016 LW Version 1
+ * 
+ * @responsabilities This class needs to ensure access to data.
+ *
+ */
+
 public class DataPoint implements IsSerializable{
 	
 	private int id;
@@ -18,7 +33,7 @@ public class DataPoint implements IsSerializable{
 	private double uncertainty;
 	private Date date;
 	
-/*Empty constructor needed for serialization*/
+/* Empty constructor needed for serialization */
 public DataPoint(){}
 
 public DataPoint(int id, int year, int month,String region, String country, String latitude, String longitude, double averageTemperature,

@@ -1,36 +1,32 @@
 package com.google.gwt.sample.climatechangeapp.client;
 
-import com.google.gwt.dom.client.Style;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.dom.client.KeyDownEvent;
-import com.google.gwt.event.dom.client.KeyDownHandler;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.ToggleButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
-
-
-
-
-
 /**import org.gwtbootstrap3.extras.slider.client.ui.Range;
 import org.gwtbootstrap3.extras.slider.client.ui.Slider;
 import org.gwtbootstrap3.extras.slider.client.ui.base.event.SlideStopEvent;
 import org.gwtbootstrap3.extras.slider.client.ui.base.event.SlideStopHandler;
 */
 
+/**
+ * 
+ * The class WorldMapView generates the world map and points on the map.
+ * 
+ * @author Carla Coccia
+ * 
+ * @history 26-11-2016 CC Set Up for filter
+ * 			26-11-2016 LL Styling list boxes
+ * 			
+ * @version 28-11-2016 CC Version 1
+ *
+ * @responsabilities This class initializes the world map, draws the map, adds data and draws markers.
+ *
+ */
+
 public class WorldMapMenu extends VerticalPanel {
-	// create panels
 	
 	private VerticalPanel sliderPanel= new VerticalPanel();
 	private VerticalPanel listPanel= new VerticalPanel();
@@ -41,18 +37,11 @@ public class WorldMapMenu extends VerticalPanel {
 	private HorizontalPanel uncertaintyPanel = new HorizontalPanel();
 	private VerticalPanel uncertaintySliderPanel= new VerticalPanel();
 	
-	
-	// create listboxes and their labels
+	//Creates list boxes and their labels
 	private ListBox chooseCountry= new ListBox();
 	private Label countryLabel= new Label("Country");
 	private ListBox chooseCity= new ListBox();
 	private Label cityLabel= new Label("City");
-	
-	
-	// create sliders and their labels
-	//private SliderBar yearSlider= new SliderBar(5,10);
-	
-
 	 
 	private Label yearLabel= new Label("Year");
 
@@ -60,7 +49,6 @@ public class WorldMapMenu extends VerticalPanel {
 	
 	private Label tempUncertaintyLabel= new Label("Uncertainty");
 	private ToggleButton hideUncertainty = new ToggleButton("Hide uncertain Data");
-	
 	
 	public WorldMapMenu(){
 		super();
@@ -71,15 +59,9 @@ public class WorldMapMenu extends VerticalPanel {
 		listPanel.setHeight("40%");
 		add(sliderPanel);
 		add(listPanel);
-		
-		//handleEvents();
-		}
+	}
 	
-	
-	
-	
-/**	private void handleEvents(){
-		
+/**	private void handleEvents(){       DOES NOT WORK!
 		
 		// Action when Country is chosen
 		chooseCountry.addChangeHandler(new ChangeHandler() {
@@ -122,22 +104,29 @@ public class WorldMapMenu extends VerticalPanel {
 		
 	}
 	*/
+
+	/**
+	 * 
+	 * Fills panels will filter options.
+	 * @pre		-
+	 * @post	-
+	 * 
+	 */
+	
 	private void fillPanels(){
-		//styleSlider();
+		
 		//Add everything in slidePanel
 		yearPanel.add(yearLabel);
-		
 		tempPanel.add(tempLabel);
 		uncertaintySliderPanel.add(tempUncertaintyLabel);
-		
 		uncertaintyPanel.add(uncertaintySliderPanel);
 		uncertaintyPanel.add(hideUncertainty);
 		sliderPanel.add(yearPanel);
 		sliderPanel.add(tempPanel);
 		sliderPanel.add(uncertaintyPanel);
-		
 		styleListBox();
-		//Add everything in listPanel
+		
+		//Adds everything in listPanel
 		countryPanel.add(countryLabel);
 		countryPanel.add(chooseCountry);
 		cityPanel.add(cityLabel);
@@ -148,7 +137,15 @@ public class WorldMapMenu extends VerticalPanel {
 	
 	}
 	
-		private void styleListBox(){
+	/**
+	 * 
+	 * Adds the items to choose for filtering.
+	 * @pre		-
+	 * @post	-
+	 * 
+	 */
+	
+	private void styleListBox(){
 		
 		chooseCity.setVisibleItemCount(1);
 		chooseCity.addItem("Abidjan");
@@ -164,8 +161,8 @@ public class WorldMapMenu extends VerticalPanel {
 		chooseCountry.addItem("Syria");
 	}
 	
-/*	private void styleSlider() {
-		// TODO anpassung der Mindest- und Maximaltemperatur.
+/*	private void styleSlider() {          DOES NOT WORK!
+		// TODO Anpassung der Mindest- und Maximaltemperatur.
 		yearSlider.setMin(1849);
 		yearSlider.setMax(2013);
 		yearSlider.setWidth("400px");
@@ -176,7 +173,6 @@ public class WorldMapMenu extends VerticalPanel {
 		tempUncertaintySlider.setMax(3);
 		tempUncertaintySlider.setWidth("100px");
 	}
-	
-	*/
+*/
 
 }
