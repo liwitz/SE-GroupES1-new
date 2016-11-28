@@ -1,11 +1,18 @@
 package com.google.gwt.sample.climatechangeapp.client;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.google.gwt.sample.climatechangeapp.shared.DataPoint;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.view.client.ListDataProvider;
 //import com.google.gwt.user.client.ui.HorizontalPanel;
 //import com.google.gwt.user.client.ui.RootPanel;
 //import com.google.gwt.user.client.ui.VerticalPanel;
@@ -25,15 +32,36 @@ import com.google.gwt.user.client.ui.FlexTable;
  *
  */
 
-public class TableView extends Composite{
+public class TableView extends DataView{
 	
 	private DockLayoutPanel mainPanel = new DockLayoutPanel(Style.Unit.EM);
 	private FlexTable dataFlexTable = new FlexTable();
-	//private String[] data = {"01-08-2000","20.00","0.10", "New York", "United States of America", "44.99N", "74.56"};
+	private int currentYear=2013;
+	private double uncertainty=15;
+	private double minTemperature = -30;
+	private double maxTemperature = 40;
+	private String country = "country";
+	private String city ="city";
+	ScrollPanel scroll;
+	private List<DataPoint> Countries = new ArrayList<>();
+	private List<DataPoint> Cities = new ArrayList<>();
 	
+	public List<DataPoint> getCountries() {
+		return Countries;
+	}
+	public void setCountries(List<DataPoint> countries) {
+		Countries = countries;
+	}
 	
+	public List<DataPoint> getCities() {
+		return Cities;
+	}
+	public void setCities(List<DataPoint> cities) {
+		Cities = cities;
+	}
 	
 	public TableView() {
+		fetchData();
 		initialize();
 		initWidget(mainPanel);
 	}
@@ -66,10 +94,29 @@ public class TableView extends Composite{
 		dataFlexTable.getCellFormatter().addStyleName(0, 6, "tableNumericColumn");
 	
 		mainPanel.add(dataFlexTable);
+		mainPanel.add(scroll);
 		// Initialize service proxy
 		
 		addData();
 		
+	}
+	
+	public void fetchData() {
+		AsyncCallback<ArrayList<DataPoint>> callback = new AsyncCallback<ArrayList<DataPoint>>() {
+			@Override
+			public void onSuccess(ArrayList<DataPoint> result) {
+				setData(result);
+				//initialize the Table once the data from the database are ready to avoid errors
+				addData();		
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+				GWT.log("Failed");
+			}
+		};
+		// call to server
+		getDataService().getTableData(currentYear,minTemperature, maxTemperature, uncertainty,city, country, callback);
 	}
 	
 	/**
@@ -81,7 +128,7 @@ public class TableView extends Composite{
 	 */
 	
 	public void addData(){
-	          	
+		
 	}
 	/*public void addData(Data[] data){
 		int row = dataFlexTable.getRowCount();

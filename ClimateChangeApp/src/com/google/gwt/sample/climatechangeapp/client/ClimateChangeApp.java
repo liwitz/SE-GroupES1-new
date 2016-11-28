@@ -40,9 +40,6 @@ public class ClimateChangeApp extends DockLayoutPanel implements EntryPoint {
 	private WorldMapView worldMapView = new WorldMapView();
 	private TableView tableView = new TableView();
 	
-	//private Button exportButton= new Button("Export data");
-	//private Data data;
-	
 	public ClimateChangeApp(){
 		
 		//Creates DockLayoutPanel

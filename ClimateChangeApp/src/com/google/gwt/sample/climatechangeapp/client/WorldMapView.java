@@ -1,8 +1,8 @@
 package com.google.gwt.sample.climatechangeapp.client;
 
+import java.util.ArrayList;
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.dom.client.Style;
-//import com.googlecode.gwt.charts.client.*;
 import com.googlecode.gwt.charts.client.ChartLoader;
 import com.googlecode.gwt.charts.client.ChartPackage;
 import com.googlecode.gwt.charts.client.ColumnType;
@@ -11,8 +11,10 @@ import com.googlecode.gwt.charts.client.geochart.GeoChart;
 import com.googlecode.gwt.charts.client.options.DisplayMode;
 import com.googlecode.gwt.charts.client.geochart.GeoChartColorAxis;
 import com.googlecode.gwt.charts.client.geochart.GeoChartOptions;
-import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.sample.climatechangeapp.shared.DataPoint;
 	
 /**
  * 
@@ -28,15 +30,69 @@ import com.google.gwt.user.client.ui.DockLayoutPanel;
  *
  */
 	
-public class WorldMapView extends Composite{
+public class WorldMapView extends DataView{
 
 	private DockLayoutPanel mainPanel = new DockLayoutPanel(Style.Unit.PX);
 	private GeoChart geoChart;
+	private int currentYear=2013;
+	private double maxTemperature=40;
+	private double minTemperature=-30;
+	private double uncertainty=15;
+	private String city="city";
+	private String country="country";
+	private Label yearLabel = new Label(""+currentYear);
+	
+	public String getCountry() {
+		return country;
+	}
 
-	// Create the MapView
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public double getUncertainty() {
+		return uncertainty;
+	}
+
+	public void setUncertainity(double uncertainty) {
+		this.uncertainty = uncertainty;
+	}
+
+	// Create the WorldMapView
 	public WorldMapView() {
 		initWidget(mainPanel);
 		initialize();
+	}
+	
+	public double getMaxTemperature() {
+		return maxTemperature;
+	}
+
+	public void setMaxTemperature(double maxTemperature) {
+		this.maxTemperature = maxTemperature;
+	}
+
+	public double getMinTemperature() {
+		return minTemperature;
+	}
+
+	public void setMinTemperature(double minTemperature) {
+		this.minTemperature = minTemperature;
+	}
+	
+	public void setCurrentYear(int year){
+		currentYear=year;
+	}
+	public int getCurrentYear() {
+		return currentYear;
 	}
 
 	/**
@@ -56,9 +112,26 @@ public class WorldMapView extends Composite{
 				// Create and attach the chart
 				geoChart = new GeoChart();
 				mainPanel.add(geoChart);
-				draw();
+				fetchData();
 			}
 		});
+	}
+	
+	public void fetchData() {
+		AsyncCallback<ArrayList<DataPoint>> callback = new AsyncCallback<ArrayList<DataPoint>>() {
+
+			@Override
+			public void onSuccess(ArrayList<DataPoint> result) {
+				setData(result);
+				draw();
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+			}
+		};
+
+		getDataService().getMapData(currentYear,minTemperature,maxTemperature,uncertainty,city,country,callback);
 	}
 
 	/**
@@ -70,48 +143,33 @@ public class WorldMapView extends Composite{
 	 */
 		
 	private void draw() {
-		// Prepare the data 
-		// TODO: Function, which gets the right data form the list.
+		if (getData() != null) {
 
-		DataTable dataTable = DataTable.create();
-		dataTable.addColumn(ColumnType.STRING, "City");
-		dataTable.addColumn(ColumnType.NUMBER, "Temperature");
-		dataTable.addRows(12);
-		dataTable.setValue(0, 0, "Rome");
-		dataTable.setValue(0, 1, 25);
-		dataTable.setValue(1, 0, "Paris");
-		dataTable.setValue(1, 1, 15);
-		dataTable.setValue(2, 0, "New York");
-		dataTable.setValue(2, 1, 10);
-		dataTable.setValue(3, 0, "Hong Kong");
-		dataTable.setValue(3, 1, 28);
-		dataTable.setValue(4, 0, "Sydney");
-		dataTable.setValue(4, 1, 32);
-		dataTable.setValue(5, 0, "Miami");
-		dataTable.setValue(5, 1, 27);
-		dataTable.setValue(6, 0, "Istanbul");
-		dataTable.setValue(6, 1, 27);
-		dataTable.setValue(7, 0, "Oslo");
-		dataTable.setValue(7, 1, -5);
-		dataTable.setValue(8, 0, "Vancouver");
-		dataTable.setValue(8, 1, -2);
-		dataTable.setValue(9, 0, "Buenos Aires");
-		dataTable.setValue(9, 1, 12);
-		dataTable.setValue(10, 0, "Kapstadt");
-		dataTable.setValue(10, 1, 0);
-		dataTable.setValue(11, 0, "Tokyo");
-		dataTable.setValue(11, 1, 3);
-			
-		// set geochart options
+			DataTable dataTable = DataTable.create();
+			dataTable.addColumn(ColumnType.STRING, "City");
+			dataTable.addColumn(ColumnType.NUMBER, "Temperature");
+
+			dataTable.addRows(getData().size());
+			for (int i = 0; i < getData().size(); i++) {
+
+				dataTable.setValue(i, 0, getData().get(i).getRegion());
+				dataTable.setValue(i, 1, getData().get(i).getAverageTemperature());
+
+			}
+			yearLabel.setText(""+currentYear);
+			geoChart.draw(dataTable, getGeoChartOptions());
+		}
+	}
+	
+	private GeoChartOptions getGeoChartOptions() {
 		GeoChartOptions options = GeoChartOptions.create();
 		options.setDisplayMode(DisplayMode.MARKERS);
 		GeoChartColorAxis geoChartColorAxis = GeoChartColorAxis.create();
 		geoChartColorAxis.setColors(getNativeArray());
 		options.setColorAxis(geoChartColorAxis);
-		options.setDatalessRegionColor("gray");
-			
-			
-		geoChart.draw(dataTable, options);
+		options.setDatalessRegionColor("#858585");
+		return options;
+
 	}
 
 	/**
