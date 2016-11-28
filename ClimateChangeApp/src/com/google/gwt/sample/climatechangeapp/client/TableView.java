@@ -2,10 +2,15 @@ package com.google.gwt.sample.climatechangeapp.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.Button;
 //import com.google.gwt.user.client.ui.HorizontalPanel;
 //import com.google.gwt.user.client.ui.RootPanel;
 //import com.google.gwt.user.client.ui.VerticalPanel;
@@ -29,7 +34,13 @@ public class TableView extends Composite{
 	
 	private DockLayoutPanel mainPanel = new DockLayoutPanel(Style.Unit.EM);
 	private FlexTable dataFlexTable = new FlexTable();
+	private HorizontalPanel addPanel = new HorizontalPanel();	//me
+	private TextBox addTextBox = new TextBox();	//me
+	private Button addFilterButton = new Button("Filter");	//me
+	private Button addResetButton = new Button("Reset");	//me
 	//private String[] data = {"01-08-2000","20.00","0.10", "New York", "United States of America", "44.99N", "74.56"};
+	private Data[] data = new Data[10];	//me
+	TableFilter filterObject = new TableFilter(data);	//me
 	private ReadCSVServiceAsync readSvc = (ReadCSVServiceAsync) GWT.create(ReadCSVService.class);
 	
 	public TableView() {
@@ -46,6 +57,8 @@ public class TableView extends Composite{
 	 */
 	
 	private void initialize(){
+		data[0].setCountry("test1");	//me@test
+		data[1].setCountry("test2");	//me@test
 		dataFlexTable.setText(0, 0, "Date");
 		dataFlexTable.setText(0, 1, "Average Temperature");
 		dataFlexTable.setText(0, 2, "Average Temperature Uncertainty");
@@ -64,7 +77,14 @@ public class TableView extends Composite{
 		dataFlexTable.getCellFormatter().addStyleName(0, 5, "tableNumericColumn");
 		dataFlexTable.getCellFormatter().addStyleName(0, 6, "tableNumericColumn");
 	
+		addPanel.add(addTextBox);	//me
+		addPanel.add(addFilterButton);	//me
+		addPanel.add(addResetButton);	//me
+		mainPanel.addNorth(addPanel, 3);	//me
 		mainPanel.add(dataFlexTable);
+		
+		// Move curson focus to the input box.
+		addTextBox.setFocus(true);	//me
 		// Initialize service proxy
 		if (readSvc == null){
 			readSvc = GWT.create(ReadCSVService.class);
@@ -86,6 +106,15 @@ public class TableView extends Composite{
 		
 		readSvc.readData("GlobalLandTemperaturesByMajorCity_v1.csv", callback);
 		*/
+		
+		// Listen for mouse events on the Filter Button
+		addFilterButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				// what happens when clicked
+				filterObject.update(data);
+				filterObject.filterByCountry("test");
+			}
+		});
 	}
 	
 	/**

@@ -1,0 +1,2 @@
+serviceClass: com.google.gwt.sample.climatechangeapp.client.ReadCSVService
+path: 11543BF45EEFC54FBE0F133316F87C35.gwt.rpc
