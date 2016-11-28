@@ -1,16 +1,15 @@
 package com.google.gwt.sample.climatechangeapp.client;
 
-
 import com.google.gwt.core.client.EntryPoint;
 //import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style;
-//import com.google.gwt.event.dom.client.ClickEvent;
-//import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 //import com.google.gwt.event.dom.client.KeyCodes;
 //import com.google.gwt.event.dom.client.KeyUpEvent;
 //import com.google.gwt.event.dom.client.KeyUpHandler;
 //import com.google.gwt.user.client.rpc.AsyncCallback;
-//import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Button;
 //import com.google.gwt.user.client.ui.DialogBox;
 //import com.google.gwt.user.client.ui.FlexTable;
 //import com.google.gwt.user.client.ui.HTML;
@@ -40,7 +39,7 @@ public class ClimateChangeApp extends DockLayoutPanel implements EntryPoint {
 	private WorldMapView worldMapView = new WorldMapView();
 	private TableView tableView = new TableView();
 	
-	//private Button exportButton= new Button("Export data");
+	private Button exportButton= new Button("Export");
 	//private Data data;
 	
 	public ClimateChangeApp(){
@@ -58,14 +57,14 @@ public class ClimateChangeApp extends DockLayoutPanel implements EntryPoint {
 
 		//Add tabPanel to north
 		addNorth(menu,40);
-		//addSouth(exportButton, 10);
+		
+		//Add exportButton to south
+		addSouth(exportButton, 10);
+		exportButton.addClickHandler(new ClickHandler(){
+			public void onClick(ClickEvent event){
+				export();}	
+		});
 	}
-	
-	/*
-	 * private static final String SERVER_ERROR = "An error occurred while "
-	 
-			+ "attempting to contact the server. Please check your network " + "connection and try again.";
-	 */
 	
 	/**
 	 * 
@@ -81,6 +80,14 @@ public class ClimateChangeApp extends DockLayoutPanel implements EntryPoint {
 		
 		//data = new Data();
 		//data.getData();
+	}
+	
+	private void export(){
+		/**$('body').html2canvas();
+		var queue = html2canvas.Parse();
+		var canvas = html2canvas.Renderer(queue,{elements:{length:1}});
+		var img = canvas.toDataURL();
+		window.open(img);*/
 	}
 	
 }

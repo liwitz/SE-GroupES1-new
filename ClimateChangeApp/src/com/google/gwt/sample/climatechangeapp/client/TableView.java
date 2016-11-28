@@ -66,7 +66,7 @@ public class TableView extends Composite{
 	
 		mainPanel.add(dataFlexTable);
 		// Initialize service proxy
-		if (readSvc == null){
+		/**if (readSvc == null){
 			readSvc = GWT.create(ReadCSVService.class);
 		}
 				
@@ -79,7 +79,7 @@ public class TableView extends Composite{
 				addData(data);		
 			}
 		};		
-		readSvc.readData("GlobalLandTemperaturesByMajorCity_v1.csv", callback);
+		readSvc.readData("GlobalLandTemperaturesByMajorCity_v1.csv", callback);*/
 	}
 	
 	/**
