@@ -1,0 +1,2 @@
+serviceClass: com.google.gwt.sample.climatechangeapp.client.DataService
+path: 90FF1847F91DC3057EA3C391951BE587.gwt.rpc
