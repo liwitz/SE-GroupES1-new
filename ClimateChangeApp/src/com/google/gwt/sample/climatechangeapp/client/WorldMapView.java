@@ -34,7 +34,7 @@ import com.google.gwt.user.client.ui.DockLayoutPanel;
  *
  */
 	
-public class WorldMapView extends DataView{
+public class WorldMapView extends Composite{
 
 	private DockLayoutPanel mainPanel = new DockLayoutPanel(Style.Unit.PX);
 	private GeoChart geoChart;
@@ -86,14 +86,13 @@ public class WorldMapView extends DataView{
 		// Prepare the data 
 		// TODO: Function, which gets the right data form the list.
 
-		if (getData() != null) {
 
 			DataTable dataTable = DataTable.create();
 			dataTable.addColumn(ColumnType.STRING, "City");
 			dataTable.addColumn(ColumnType.NUMBER, "Temperature");
 			dataTable.addColumn(ColumnType.NUMBER,"Uncertainty");
 
-			dataTable.addRows(getData().size());
+	/*		dataTable.addRows(getData().size());
 			for (int i = 0; i < getData().size(); i++) {
 
 				dataTable.setValue(i, 0, getData().get(i).getRegion());
@@ -101,7 +100,7 @@ public class WorldMapView extends DataView{
 				dataTable.setValue(i, 2, getData().get(i).getUncertainty());
 
 			}
-			
+			*/
 			
 			
 		// set geochart options
@@ -114,7 +113,7 @@ public class WorldMapView extends DataView{
 			
 			
 		geoChart.draw(dataTable, options);
-		}
+		
 	}
 
 	/**
@@ -125,7 +124,7 @@ public class WorldMapView extends DataView{
 	 * @return	returns array with colors for markers
 	 * 
 	 */
-	public void fetchData() {
+/*	public void fetchData() {
 		AsyncCallback<ArrayList<DataPoint>> callback = new AsyncCallback<ArrayList<DataPoint>>() {
 
 			@Override
@@ -144,7 +143,7 @@ public class WorldMapView extends DataView{
 		getDataService().getMapData(currentYear,minTemperature,maxTemperature,uncertainty,city,country,callback);
 	}
 	
-
+*/
 	private native JsArrayString getNativeArray() /*-{
 		return [ "0000FF", "5858FA", "A9A9F5", "F7819F", "FE2E64", "FF0040" ];
 	}-*/;

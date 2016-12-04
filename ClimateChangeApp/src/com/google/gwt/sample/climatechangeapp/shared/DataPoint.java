@@ -1,94 +1,64 @@
 package com.google.gwt.sample.climatechangeapp.shared;
 
-import java.sql.Date;
+import java.util.Date;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class DataPoint implements IsSerializable{
 	
-	private int id;
-	private int year;
-	private int month;
 	
-	private String region;
+	private String city;
 	private String country;
-	private String latitude;
-	private String longitude;
-	private double averageTemperature;
+	private double latitude;
+	private double longitude;
+	private double temperature;
 	private double uncertainty;
 	private Date date;
 	
 /*Empty constructor needed for serialization*/
 public DataPoint(){}
 
-public DataPoint(int id, int year, int month,String region, String country, String latitude, String longitude, double averageTemperature,
-		double uncertainty) {
-		super();
-		this.id = id;
-		this.year = year;
-		this.month = month;
-		this.setRegion(region);
+public DataPoint(double temperature,double uncertainty,Date date, String city, String country, double latitude, double longitude) {
+		
+		this.setCity(city);
 		this.country = country;
 		this.latitude = latitude;
 		this.longitude = longitude;
-		this.averageTemperature = averageTemperature;
+		this.temperature = temperature;
 		this.uncertainty = uncertainty;
+		this.date= date;
 	}
 
-	public int getMonth() {
-		return month;
-	}
-	public void setMonth(int month) {
-	this.month = month;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public int getYear() {
-		return year;
-	}
-	public void setYear(int year) {
-		this.year = year;
-	}
-	
+
 	public String getCountry() {
 		return country;
 	}
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	public String getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(String latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
-	public String getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(String longitude) {
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-	public double getAverageTemperature() {
-		return averageTemperature;
+	public double getTemperature() {
+		return temperature;
 	}
-	public void setAverageTemperature(double averageTemperature) {
-		this.averageTemperature = averageTemperature;
+	public void setAverageTemperature(double temperature) {
+		this.temperature = temperature;
 	}
 	public double getUncertainty() {
 		return uncertainty;
 	}
 	public void setUncertainty(double uncertainty) {
 		this.uncertainty = uncertainty;
-	}
-	public String getRegion() {
-		return region;
-	}
-	public void setRegion(String region) {
-		this.region = region;
 	}
 	public Date getDate() {
 		return date;
@@ -97,9 +67,9 @@ public DataPoint(int id, int year, int month,String region, String country, Stri
 		this.date = date;
 	}
 	public void setCity(String city) {
-		this.region= city;
+		this.city= city;
 	}
 	public String getCity(){
-		return region;
+		return city;
 	}
 }
